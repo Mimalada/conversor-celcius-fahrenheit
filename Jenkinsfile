@@ -13,14 +13,19 @@ pipeline {
 
         stage('Testes') {
             steps {
-                echo 'Executando testes...'
+                echo 'Executando testes e gerando relatorio JUnit...'
 
-            bat(
-                returnStatus: true,
-                script: 'node --test --test-reporter=junit --test-reporter-destination=resultado.xml teste.js'
-            )
+                bat 'node --test --test-reporter=junit --test-reporter-destination=resultado.xml teste.js'
 
-        junit 'resultado.xml'
+                junit 'resultado.xml'
+            }
+        }
+
+        stage('Cobertura') {
+            steps {
+                echo 'Calculando cobertura de codigo...'
+
+                bat 'node --test --experimental-test-coverage teste.js'
             }
         }
     }
