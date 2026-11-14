@@ -15,12 +15,12 @@ pipeline {
             steps {
                 echo 'Executando testes...'
 
-                bat(
-                    returnStatus: true,
-                    script: 'node --test --test-reporter=junit --test-reporter-destination=resultado.xml teste.js'
-                )
+            bat(
+                returnStatus: true,
+                script: 'node --test --test-reporter=junit --test-reporter-destination=resultado.xml teste.js'
+            )
 
-                junit 'resultado.xml'
+        junit 'resultado.xml'
             }
         }
     }

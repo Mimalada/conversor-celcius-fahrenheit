@@ -2,7 +2,7 @@
 const readline = require("readline");
 
 function celsiusParaFahrenheit(c) {
-  return (c * 9 / 5) + ;
+  return (c * 9 / 5) + 30;
 }
 
 function fahrenheitParaCelsius(f) {
