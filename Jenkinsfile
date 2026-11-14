@@ -3,26 +3,25 @@ pipeline {
     agent any
 
     stages {
-        stage('Verificar Node.js') {
+        stage('Build') {
             steps {
-                bat 'node --version'
+                echo 'Verificando sintaxe do codigo...'
+                bat 'node --check converter_temp.js'
+                bat 'node --check teste.js'
             }
         }
 
-        stage('Executar testes') {
+        stage('Testes') {
             steps {
-                bat 'node teste.js'
+                echo 'Executando testes...'
+
+                bat(
+                    returnStatus: true,
+                    script: 'node --test --test-reporter=junit --test-reporter-destination=resultado.xml teste.js'
+                )
+
+                junit 'resultado.xml'
             }
-        }
-    }
-
-    post {
-        success {
-            echo 'Todos os testes passaram!'
-        }
-
-        failure {
-            echo 'Falha na execução dos testes!'
         }
     }
 }

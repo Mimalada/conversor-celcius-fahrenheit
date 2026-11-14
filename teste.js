@@ -1,4 +1,5 @@
 
+const test = require("node:test");
 const assert = require("node:assert/strict");
 
 const {
@@ -6,14 +7,12 @@ const {
   fahrenheitParaCelsius
 } = require("./converter_temp");
 
-// Caso de teste 1: Celsius para Fahrenheit
-assert.equal(celsiusParaFahrenheit(25), 77);
-console.log("Teste 1 passou: 25°C = 77°F");
+test("Converte 25 Celsius para 77 Fahrenheit", () => {
+  assert.equal(celsiusParaFahrenheit(25), 77);
+});
 
-// Caso de teste 2: Fahrenheit para Celsius
-assert.ok(
-  Math.abs(fahrenheitParaCelsius(100) - 37.77777777777778) < 0.000001
-);
-console.log("Teste 2 passou: 100°F = 37.78°C");
-
-console.log("Todos os testes passaram!");
+test("Converte 100 Fahrenheit para 37.78 Celsius", () => {
+  assert.ok(
+    Math.abs(fahrenheitParaCelsius(100) - 37.77777777777778) < 0.000001
+  );
+});
